@@ -55,7 +55,7 @@ public class SinglyLinkedListTest {
     }
 
     @Test
-    public void itShouldRemoveTheCorrectElementAndMaintainTheLinks() {
+    public void itShouldFindAndRemoveTheCorrectElement() {
         SinglyLinkedList list = new SinglyLinkedList();
         list.addFirst(10);
         list.addFirst(11);
@@ -66,13 +66,50 @@ public class SinglyLinkedListTest {
     }
 
     @Test
+    public void itShouldFindAndRemoveTheCorrectElementRecursive() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.addFirst(10);
+        list.addFirst(11);
+        list.addFirst(12);
+        list.addFirst(13);
+        assertTrue(list.recursiveRemove(12));
+        assertEquals(3, list.getCount());
+    }
+
+    @Test
     public void itShouldRemoveTheFinalLink() {
         SinglyLinkedList list = new SinglyLinkedList();
         list.addFirst(10);
         list.addFirst(11);
         list.addFirst(12);
         list.addFirst(13);
-        assertTrue(list.remove(13));
+        assertTrue(list.remove(10));
+        assertEquals(3, list.getCount());
+    }
+
+    @Test
+    public void itShouldRemoveTheFinalLinkRecursive() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.addFirst(10);
+        list.addFirst(11);
+        list.addFirst(12);
+        list.addFirst(13);
+//        assertTrue(list.recursiveRemove(10));
+        list.recursiveRemove(10);
+        list.printValues();
+        assertEquals(3, list.getCount());
+    }
+
+    @Test
+    public void itShouldRemoveTheFirstLinkRecursive() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.addFirst(10);
+        list.addFirst(11);
+        list.addFirst(12);
+        list.addFirst(13);
+        list.printValues();
+        assertTrue(list.recursiveRemove(13));
+        list.printValues();
         assertEquals(3, list.getCount());
     }
 
@@ -84,6 +121,16 @@ public class SinglyLinkedListTest {
         list.addFirst(12);
         list.addFirst(13);
         assertFalse(list.remove(25));
+        assertEquals(4, list.getCount());
+    }
+
+    @Test
+    public void itShouldReturnFalseNoItemFoundRecursive() {
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.addFirst(10);
+        list.addFirst(11);
+        list.addFirst(12);
+        list.addFirst(13);
         assertEquals(4, list.getCount());
     }
 }

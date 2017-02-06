@@ -41,10 +41,6 @@ public class SinglyLinkedList {
     }
 
     public boolean remove(int value) {
-        //empty list
-        if (head == null) {
-            return false;
-        }
         SinglyLinkedNode previousNode = null;
         for (SinglyLinkedNode currentNode = this.head; currentNode != null; previousNode = currentNode, currentNode = currentNode.getNext()) {
             if (currentNode.getValue() == value) {
@@ -60,6 +56,14 @@ public class SinglyLinkedList {
         return false;
     }
 
+    public boolean recursiveRemove(int value) {
+        if (head == null) {
+            return false;
+        }
+        this.recursiveRm(head, value);
+        return true;
+    }
+
     public int getCount() {
         return count;
     }
@@ -72,6 +76,20 @@ public class SinglyLinkedList {
         for (SinglyLinkedNode currentNode = this.head; currentNode != null; currentNode = currentNode.getNext()) {
             System.out.println(currentNode.getValue());
         }
+    }
+
+    private SinglyLinkedNode recursiveRm(SinglyLinkedNode currentNode, int value) {
+        //you've passed a
+        if (currentNode == null) {
+            return null ;
+        }
+        //We found our guy, we need to return the next link.
+        if (currentNode.getValue() == value) {
+            count -= 1;
+            return currentNode.getNext();
+        }
+        currentNode.setNext(recursiveRm(currentNode.getNext(), value));
+        return currentNode;
     }
 }
 
